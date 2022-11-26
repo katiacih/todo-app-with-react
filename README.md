@@ -2,9 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## Aprendizados
+
+## Gerando doc
+
+JSDoc 3 é uma API que nos permite gerar documentação de , similar to Javadoc or phpDocumentor. 
+
+```
+jsdoc book.js
+```
+
 
 ### `npm start`
 

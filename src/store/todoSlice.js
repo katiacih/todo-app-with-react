@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { loadList } from '../actions/loadList'
+import loadData from '../actions/loadData';
 
 const lista = [
   {
@@ -15,7 +15,7 @@ const lista = [
 ]
 
 
-export const todoSlice = createSlice({
+export const todoReducer = createSlice({
   name: 'todo',
   initialState: {
     list: [],
@@ -28,6 +28,7 @@ export const todoSlice = createSlice({
   },
   reducers: {
     getList: state => { state.list = [] },
+    loadAllListTasks: state => loadData(),
     changedToInProgress: state => { state.list = []}, 
     mountLista: state => state, 
     addToList: (state, action) => {
@@ -37,8 +38,8 @@ export const todoSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addToList, mountLista, changedToInProgress, getList } = todoSlice.actions;
+export const { addToList, mountLista, changedToInProgress, getList, loadAllListTasks } = todoReducer.actions;
 
 export const getState = state => state.todo
 
-export default todoSlice.reducer;
+export default todoReducer.reducer;

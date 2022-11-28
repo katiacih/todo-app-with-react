@@ -1,16 +1,26 @@
 
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import TodoList from './TodoList';
+import TodoList from './pages/TodoList';
 import { useDispatch } from 'react-redux';
-import { loadList } from './actions/loadList';
+import { loadAllListTasks } from './store/todoSlice';
+import { Button } from 'react-bootstrap';
+import  NewTask  from './pages/NewTask'
 
 
 const Wrapper = styled.div`
   height: 100% ;
   padding: 24px;
   background-color: #ececec73;
+  position: relative;
 `;
+
+const WrapperHeader = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+`;
+
 const Title = styled.h1`
   margin-top: 30px;
   margin-bottom: 60px;
@@ -55,26 +65,30 @@ const SectionArchived = styled(SectionTitle)`
 
 function App() {
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(loadList(dispatch));
-  }, [dispatch])
-  // const lista = dispatch(mountLista())
-  // const test = dispatch(getList());
-  // const list = useSelector(getState);
+  const dataLoaded = dispatch(loadAllListTasks());
+  console.log(`dataLoadrd -> ${dataLoaded.list}`);
+  const [data, setData ] = useState(dataLoaded);
+  const [showModal, setShowModal ] = useState(false);
 
-
+  const handleCloseModal = () => {
+    setShowModal(false);
+  }
   return (
     <Wrapper >
-      <Title>My day</Title>
+        <Title>My day</Title>
+      <WrapperHeader>
+        <Button variant="primary">Nova tarefa</Button>{' '}
+      </WrapperHeader>
+      <NewTask show={showModal} hideModal={handleCloseModal}/>
       <SectionWrapper>
         <SectionTodo>TO DO</SectionTodo>
-        <TodoList tasks={[]}/>
+        <TodoList tasks={data.listTodo}/>
       </SectionWrapper>
+
 
       <SectionWrapper>
         <SectionInProgress>EM PROGRESSO</SectionInProgress>
-        <TodoList/>
+        <TodoList tasks={data.listTodo}/>
       </SectionWrapper>
 
       <SectionWrapper>

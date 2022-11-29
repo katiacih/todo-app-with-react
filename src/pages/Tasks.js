@@ -1,5 +1,5 @@
 import React from 'react';
-import Todo from './Todo';
+import ItemList from './ItemList';
 import styled from 'styled-components';
 
 const List = styled.ul`
@@ -26,8 +26,8 @@ const TxtEmpty = styled.p`
  * render tasks.
  * @param {any} tasks[]- list of tasks.
  */
-function TodoList({tasks}) {
-  console.log(tasks);
+function Tasks({tasks}) {
+  // console.log(tasks);
 
   if(tasks === undefined | tasks?.length === 0) {
     return <Empty><TxtEmpty>Não há itens adicionados</TxtEmpty></Empty>
@@ -35,9 +35,9 @@ function TodoList({tasks}) {
 
   return (
       <List>
-        {tasks.map((todo) => <Todo key={todo.id} todo={todo} />)}
+        {tasks.map((item) => <ItemList key={item.id} task={item} />)}
       </List>
     )
 }
 
-export default TodoList;
+export default Tasks;

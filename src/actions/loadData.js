@@ -32,7 +32,7 @@ import { getTasksFromLocalStorage } from './localStorage';
 function loadData() {
   const list = getTasksFromLocalStorage();
 
-  console.log(list);
+  // console.log(list);
 
  return ({
     list: list,

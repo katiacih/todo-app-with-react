@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TodoList from './pages/TodoList';
+import Tasks from './pages/Tasks';
 import { useDispatch } from 'react-redux';
 import { loadAllListTasks } from './store/todoSlice';
 import { Button } from 'react-bootstrap';
@@ -66,29 +66,29 @@ const SectionArchived = styled(SectionTitle)`
 function App() {
   const dispatch = useDispatch();
   const dataLoaded = dispatch(loadAllListTasks());
-  console.log(`dataLoadrd -> ${dataLoaded.list}`);
+  // console.log(`dataLoadrd -> ${dataLoaded.list}`);
   const [data, setData ] = useState(dataLoaded);
   const [showModal, setShowModal ] = useState(false);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  }
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   return (
     <Wrapper >
         <Title>My day</Title>
       <WrapperHeader>
-        <Button variant="primary">Nova tarefa</Button>{' '}
+        <Button variant="primary" onClick={() =>handleShow()}>Nova tarefa</Button>{' '}
       </WrapperHeader>
-      <NewTask show={showModal} hideModal={handleCloseModal}/>
+      <NewTask show={showModal} hideModal={handleClose}/>
       <SectionWrapper>
         <SectionTodo>TO DO</SectionTodo>
-        <TodoList tasks={data.listTodo}/>
+        <Tasks tasks={data.listTodo}/>
       </SectionWrapper>
 
 
       <SectionWrapper>
         <SectionInProgress>EM PROGRESSO</SectionInProgress>
-        <TodoList tasks={data.listTodo}/>
+        <Tasks tasks={data.listTodo}/>
       </SectionWrapper>
 
       <SectionWrapper>

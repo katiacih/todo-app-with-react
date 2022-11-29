@@ -21,20 +21,20 @@ const Item = styled.li`
 `;
 /**
  * Represents a task.
- * @param {any} todo - Represents task.
- * @param {any} todo.id - id of task
- * @param {any} todo.description  - description of task
- * @param {any} todo.status - status of task
+ * @param {any} task - Represents task.
+ * @param {any} task.id - id of task
+ * @param {string} task.description  - description of task
+ * @param {string} task.status - status of task ( 'todo' | 'in_progress' | 'done' | 'archived')
  */
-function Todo({todo}) {
+function ItemList({task}) {
 
   
   return (
-    <Item key={todo.id}>
+    <Item key={task.id}>
       <Checkbox type="checkbox" />
-      <Description>{todo.description}</Description>
+      <Description>{task.description}</Description>
     </Item>
   )
 }
 
-export default Todo;
+export default ItemList;

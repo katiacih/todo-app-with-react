@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import Todo from './Todo';
+import ItemList from './ItemList';
 
 test('renders INFO to correctly', () => {
-  render(<Todo todo={{id: 1, description: 'TEsting component'}} />);
+  render(<ItemList todo={{id: 1, description: 'TEsting component'}} />);
   const element = screen.getByText(/TEst/i);
   expect(element).toBeInTheDocument();
 });

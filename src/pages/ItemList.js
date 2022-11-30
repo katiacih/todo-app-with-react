@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import { Button, ButtonGroup} from 'react-bootstrap';
 
 
 const Description = styled.span`
@@ -8,16 +9,13 @@ const Description = styled.span`
   color: #595656;
 `;
 
-const Checkbox = styled.input`
-  width: 18px;
-  height: 18px;
-  margin-right: 8px;
-`;
-
 const Item = styled.li`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 8px;
+  padding: 4px 8px;
+  border: 1px solid #ebe5e5;
 `;
 /**
  * Represents a task.
@@ -31,8 +29,12 @@ function ItemList({task}) {
   
   return (
     <Item key={task.id}>
-      <Checkbox type="checkbox" />
       <Description>{task.description}</Description>
+      <ButtonGroup aria-label="Basic example">
+        <Button variant="outlined">⬆️</Button>
+        <Button variant="outlined">⬇️</Button>
+        <Button variant="outlined">🗑</Button>
+      </ButtonGroup>
     </Item>
   )
 }

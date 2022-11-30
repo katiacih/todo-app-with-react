@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Tasks from './pages/Tasks';
-import { useDispatch } from 'react-redux';
-import { loadAllListTasks } from './store/todoSlice';
+import { getList } from './store/tasksSlice';
 import { Button } from 'react-bootstrap';
 import  NewTask  from './pages/NewTask'
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Wrapper = styled.div`
@@ -65,12 +65,16 @@ const SectionArchived = styled(SectionTitle)`
 
 function App() {
   const dispatch = useDispatch();
-  const dataLoaded = dispatch(loadAllListTasks());
-  // console.log(`dataLoadrd -> ${dataLoaded.list}`);
-  const [data, setData ] = useState(dataLoaded);
+  const data = useSelector((state) => state.tasks);
   const [showModal, setShowModal ] = useState(false);
+  
+  useEffect(() => {
+    dispatch(getList())
+  },[dispatch])
 
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => { 
+    setShowModal(false);
+  }
   const handleShow = () => setShowModal(true);
 
   return (
@@ -88,17 +92,17 @@ function App() {
 
       <SectionWrapper>
         <SectionInProgress>EM PROGRESSO</SectionInProgress>
-        <Tasks tasks={data.listTodo}/>
+        <Tasks tasks={data.listInProgress}/>
       </SectionWrapper>
 
       <SectionWrapper>
         <SectionDone >FEITO</SectionDone>
-        {/* <TodoList/> */}
+        <Tasks tasks={data.listDone}/>
       </SectionWrapper>
      
       <SectionWrapper>
         <SectionArchived>ARQUIVADO</SectionArchived>
-        {/* <TodoList/> */}
+        <Tasks tasks={data.listArchived}/>
       </SectionWrapper>
     </Wrapper>
   );

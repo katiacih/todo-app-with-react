@@ -1,4 +1,5 @@
-
+import { addTaskLocalStorage } from './localStorage';
+import { buildDataTask } from '../uteis/filters';
 
 
 /**
@@ -10,18 +11,11 @@
  * @return {any} object 
  */
 
-function createTask({task}) {
-  /**TO DO */
-
-  return ({
-    list: [],
-    listTodo: [],
-    listInProgress: [],
-    listDone: [],
-    listArchived: [],
-    count: [],
-    loading: false
-  })
+function createTask(task) {
+  const list = addTaskLocalStorage(task)
+  return buildDataTask(list);
 
 }
 
+
+export default createTask;

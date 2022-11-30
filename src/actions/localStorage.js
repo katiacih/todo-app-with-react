@@ -29,11 +29,27 @@ export function setTaskLocalStorage(tasks) {
  * @param {any} newTask - Represents one task.
  */
 export function addTaskLocalStorage(newTask){
-
   const tasks = getTasksFromLocalStorage()
-  tasks.push(newTask);
+  const built = buildTask(newTask, tasks.length)
+  tasks.push(built);
   setTaskLocalStorage(tasks)
   return tasks
+}
+
+/**
+ * set task in localStorage.
+ * @param {any} newTask - Represents one task.
+ * @param {any} newTask.id - Represents one task.
+ * @param {any} newTask.description - Represents one task.
+ * @param {any} newTask.status - Represents one task.
+ */
+function buildTask(newTask, count) {
+  return {
+    id: count + 1,
+    description: newTask.description,
+    status: newTask.status
+  }
+  
 }
 
 /**

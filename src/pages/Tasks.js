@@ -6,7 +6,7 @@ const List = styled.ul`
   list-style: none;
   flex-flow: column;
   align-items: flex-start;
-  padding: 24px;
+  padding: 30px 24px;
   `;
 
 const Empty = styled.div`

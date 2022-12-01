@@ -15,6 +15,7 @@ export function getTasksFromLocalStorage() {
  */
 export function setTaskLocalStorage(tasks) {
   localStorage['tasks'] = JSON.stringify(tasks)
+  return tasks ? tasks : [];
 }
 
 

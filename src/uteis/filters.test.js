@@ -1,12 +1,12 @@
-import { faker } from '@faker-js/faker';
 import { filterListByTodo, filterListByDone, filterListByArchived, filterListByInProgress, buildDataTask} from './filters';
+import { createTask } from './data';
 
 describe('Validate Filters', () => {
-  const item1 = {id: faker.datatype.number(), description: faker.lorem.sentence(), status: 'todo'}
-  const item2 = {id: faker.datatype.number(), description: faker.lorem.sentence(), status: 'in_progress'}
-  const item3 = {id: faker.datatype.number(), description: faker.lorem.sentence(), status: 'in_progress'}
-  const item4 = {id: faker.datatype.number(), description: faker.lorem.sentence(), status: 'done'}
-  const item5 = {id: faker.datatype.number(), description: faker.lorem.sentence(), status: 'archived'}
+  const item1 = createTask();
+  const item2 = createTask('in_progress');
+  const item3 = createTask('in_progress');
+  const item4 = createTask('done');
+  const item5 = createTask('archived');
   const list = [item1, item2, item3, item4, item5]
 
   test('validates filter by todo', () => {

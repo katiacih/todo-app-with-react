@@ -4,11 +4,18 @@
 Projeto criado para atualizar conteúdos relacionados a redux
 
 
+# Preview 
+
+![gif](https://github.com/katiacih/todo-app-with-redux/blob/main/res/preview.png)
+
 ## Ferramentas & Tecnologias
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)  ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white) ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
 ## Commands
+
+
+
 
 ## Gerando documentação
 

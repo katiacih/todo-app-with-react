@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { createTask } from '../uteis/data';
 import loadData  from './loadData';
-import { setTaskLocalStorage } from './localStorage';
+import { addTaskLocalStorage } from './localStorage';
 
 describe('LoadData', () => { 
   afterEach(() => {
@@ -13,10 +12,12 @@ describe('LoadData', () => {
   });
 
   test('loadData is not empty', () => {
-    const task = createTask()
-    setTaskLocalStorage([task])
+    const newTask = { id: 1, 
+      description: faker.lorem.sentence(), 
+      status: 'todo'}
+    addTaskLocalStorage(newTask)
     expect(loadData()).toEqual(
-      {"count": 1, "list": [task], "listArchived": [], "listDone": [], "listInProgress": [], "listTodo": [task], "loading": false}
+      {"count": 1, "list": [newTask], "listArchived": [], "listDone": [], "listInProgress": [], "listTodo": [newTask], "loading": false}
       
       );
   });

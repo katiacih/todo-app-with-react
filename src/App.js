@@ -6,6 +6,7 @@ import { getList } from './store/tasksSlice';
 import { Button } from 'react-bootstrap';
 import  NewTask  from './pages/NewTask'
 import { useDispatch, useSelector } from 'react-redux';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const Wrapper = styled.div`
@@ -61,48 +62,61 @@ const SectionArchived = styled(SectionTitle)`
   background-color: gray;
 `;
 
-
-
 function App() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.tasks);
-  const [showModal, setShowModal ] = useState(false);
+  const data = useSelector((state) => state.tasks)
+  const [showModalNewTask, setShowModalNewTask ] = useState(false);
   
   useEffect(() => {
     dispatch(getList())
   },[dispatch])
 
+
   const handleClose = () => { 
-    setShowModal(false);
+    setShowModalNewTask(false);
   }
-  const handleShow = () => setShowModal(true);
+  const handleShow = () => setShowModalNewTask(true);
 
   return (
     <Wrapper >
         <Title>My day</Title>
       <WrapperHeader>
-        <Button variant="primary" onClick={() =>handleShow()}>Nova tarefa</Button>{' '}
+        <Button variant="primary" onClick={() => handleShow()}>Nova tarefa</Button>{' '}
       </WrapperHeader>
-      <NewTask show={showModal} hideModal={handleClose}/>
+      <NewTask show={showModalNewTask} hideModal={handleClose}/>
       <SectionWrapper>
         <SectionTodo>TO DO</SectionTodo>
-        <Tasks tasks={data.listTodo}/>
+        {
+          data.loading ? <Spinner animation="border" role="status"  variant="light">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner> : <Tasks tasks={data.listTodo}/>
+        }
+        
       </SectionWrapper>
 
 
       <SectionWrapper>
         <SectionInProgress>EM PROGRESSO</SectionInProgress>
-        <Tasks tasks={data.listInProgress}/>
+        {
+          data.loading ? <Spinner animation="border" role="status"  variant="light">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner> : <Tasks tasks={data.listInProgress}/> }
       </SectionWrapper>
 
       <SectionWrapper>
         <SectionDone >FEITO</SectionDone>
-        <Tasks tasks={data.listDone}/>
+        {
+          data.loading ? <Spinner animation="border" role="status"  variant="light">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner> : <Tasks tasks={data.listDone}/> }
       </SectionWrapper>
      
       <SectionWrapper>
         <SectionArchived>ARQUIVADO</SectionArchived>
-        <Tasks tasks={data.listArchived}/>
+        {
+          data.loading ? <Spinner animation="border" role="status"  variant="light">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner> : <Tasks tasks={data.listArchived}/> }
       </SectionWrapper>
     </Wrapper>
   );

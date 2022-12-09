@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { newTask } from '../store/tasksSlice';
 
 
@@ -94,5 +95,9 @@ function NewTask({show, hideModal}) {
   )
 }
 
+NewTask.propTypes = {
+  show: PropTypes.bool,
+  hideModal: PropTypes.func
+}
 
 export default NewTask;

@@ -5,7 +5,13 @@ import Tasks from './Tasks';
 const item1 = {id: faker.datatype.number(), description: faker.lorem.sentence(), status: 'todo'}
 const list = [item1]
 
-describe('Component Tasks', () => {
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(),
+  useDispatch: () => mockDispatch
+}));
+
+describe('Tasks - Component', () => {
   
   test('renders list', () => {
     render(<Tasks tasks={list} />);

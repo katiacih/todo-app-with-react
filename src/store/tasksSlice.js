@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import createTask from '../actions/createTask';
 import loadData from '../actions/loadData';
+import changeStatus from '../actions/changeStatus';
+import removeTask from '../actions/removeTask';
 
 export const tasksSlice = createSlice({
   name: 'todo',
@@ -17,31 +19,31 @@ export const tasksSlice = createSlice({
     getList() { return loadData() },
     newTask(_, action) {
       if(action.type === 'todo/newTask') {
-        const newList = createTask(action.payload)
-        return newList
+        const newList = createTask(action.payload);
+        return newList;
       }
-    }
-    // loadAllListTasks: _ => loadData(),
-    // changedToInProgress: state => { state.list = []}, 
-    // mountLista: state => state, 
+    },
+    remove(_, action) { 
+      if(action.type === 'todo/remove') {
+        const newList = removeTask(action.payload)
+        return newList;
+      }
+    },
+    changeTask(_, action) {
+      if(action.type === 'todo/changeTask') {
+        const newList = changeStatus(action.payload?.taskId,  action.payload?.status)
+        return newList;
+      }
+    } 
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { getList, newTask } = tasksSlice.actions;
+export const { getList, newTask, remove, changeTask } = tasksSlice.actions;
 
-// export const getState = createSelector(
-//   (state) => { 
-//     console.log('getState');
-//     console.log(state);
-//     return state?.tasks
-//   }
+
 export const getState = (state) => { 
-    console.log('getState');
-    console.log(state);
     return state?.tasks
   }
-  // (state) => state.tasks,
-  // (todos) => tasks.filter((tasks) => todo.completed).length
 
 export default tasksSlice.reducer;

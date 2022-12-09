@@ -18,20 +18,13 @@ export function setTaskLocalStorage(tasks) {
   return tasks ? tasks : [];
 }
 
-
-// export function getNewId = (): number => {
-//   const tasksDb = localStorage['tasks'];
-//   let listaTasks = tasksDb ? JSON.parse(tasksDb) : [];
-//   return listaTasks.length++;
-// }
-
 /**
  * set task in localStorage.
  * @param {any} newTask - Represents one task.
  */
 export function addTaskLocalStorage(newTask){
   const tasks = getTasksFromLocalStorage()
-  const built = buildTask(newTask, tasks.length)
+  const built = buildTask(newTask, tasks)
   tasks.push(built);
   setTaskLocalStorage(tasks)
   return tasks
@@ -43,10 +36,19 @@ export function addTaskLocalStorage(newTask){
  * @param {any} newTask.id - Represents one task.
  * @param {any} newTask.description - Represents one task.
  * @param {any} newTask.status - Represents one task.
+ * @param {any[]} tasks - List of tasks
  */
-function buildTask(newTask, count) {
+function buildTask(newTask, tasks) {
+  let maxId;
+  if(tasks.length === 0 ) {
+    maxId = 0;
+  } else {
+    const listIds = tasks.map((task) => task.id)
+    maxId = Math.max(...listIds)
+  }
+
   return {
-    id: count + 1,
+    id: maxId + 1,
     description: newTask.description,
     status: newTask.status
   }
